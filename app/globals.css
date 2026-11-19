@@ -1,0 +1,72 @@
+
+@import "tailwindcss";
+
+/* THE RAJSHREE EDITION — DESIGN SYSTEM */
+
+:root {
+  --background: #F3EEE5;
+  --foreground: #242321;
+  --taupe: #A58A76;
+  --dusty-blue: #A9B7C6;
+  --muted-rose: #9B6974;
+  --paper: #E8DFD2;
+  --secondary-text: #6F6A63;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body), sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-editorial {
+  font-family: var(--font-editorial), Georgia, serif;
+}
+
+.font-handwritten {
+  font-family: var(--font-handwritten), cursive;
+}
+
+::selection {
+  background: var(--muted-rose);
+  color: #FFFFFF;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Custom scrollbar */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--taupe);
+  border-radius: 10px;
+}
