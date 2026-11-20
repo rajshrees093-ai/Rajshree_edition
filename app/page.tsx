@@ -3,102 +3,176 @@ import Image from "next/image";
 
 const projects = [
   {
-    number: "01",
-    category: "MACHINE LEARNING · AI",
+    category: "ARTIFICIAL INTELLIGENCE · MACHINE LEARNING",
     title: "Sentinel",
     subtitle: "Finding the unusual, before it becomes a problem.",
     description:
       "An AI-powered credit card fraud detection system that explores anomaly detection to identify suspicious transactions and make digital payments safer.",
     technologies: ["Python", "FastAPI", "Next.js", "Supabase", "Machine Learning"],
-    note: "Where data meets security.",
-    status: "IN DEVELOPMENT",
+    visual: "sentinel",
+    visualLabel: "Fraud Detection Dashboard",
   },
   {
-    number: "02",
     category: "FULL STACK DEVELOPMENT",
     title: "FocusFlow",
     subtitle: "A little more focus. A little less chaos.",
     description:
       "A productivity application designed to help users organise their work, manage tasks and build better focus habits through a clean and interactive experience.",
     technologies: ["React", "Vite", "Node.js", "Express", "Claude API"],
-    note: "Built for better everyday flow.",
-    status: "PROJECT",
+    visual: "focusflow",
+    visualLabel: "Productivity Workspace",
   },
   {
-    number: "03",
-    category: "GENERATIVE AI · HACKATHON",
+    category: "GENERATIVE AI",
     title: "Story Generator",
     subtitle: "Turning imagination into visual stories.",
     description:
-      "A text-to-image story generation project developed during the GUVI × HCL 48-hour hackathon, exploring the creative possibilities of generative AI.",
+      "A text-to-image story generation project developed during the GUVI × HCL hackathon, exploring the creative possibilities of generative AI.",
     technologies: ["Python", "Generative AI", "Text-to-Image"],
-    note: "An experiment in imagination.",
-    status: "HACKATHON PROJECT",
+    visual: "story",
+    visualLabel: "Creative Storytelling",
   },
 ];
 
 const experiences = [
   {
-    number: "01",
     type: "INTERNSHIP",
     title: "Labmentix",
     role: "Internship Experience",
     description:
       "An opportunity to gain practical exposure, work on assigned tasks and strengthen my understanding of technology through hands-on learning.",
-    note: "Learning beyond the classroom.",
-    tone: "experience-paper",
   },
   {
-    number: "02",
     type: "INTERNSHIP",
     title: "CodeAlpha",
     role: "Python Development",
     description:
       "Worked on Python-based projects, including a Language Translation Tool built using Streamlit, deep-translator and gTTS, along with an FAQ chatbot.",
-    note: "Turning concepts into working projects.",
-    tone: "experience-blue",
   },
   {
-    number: "03",
-    type: "COMMUNITY · LEADERSHIP",
+    type: "COMMUNITY & LEADERSHIP",
     title: "GDG on Campus, ABESEC",
     role: "PR & Outreach Head",
     description:
       "Working with the community team on outreach, collaborations, communication and event initiatives while helping connect students with technology and opportunities.",
-    note: "Building connections that matter.",
-    tone: "experience-rose",
   },
   {
-    number: "04",
-    type: "COMMUNITY · TEAMWORK",
+    type: "COMMUNITY & TEAMWORK",
     title: "Connect Karo",
     role: "LinkedIn Taskforce",
     description:
       "Participated in a team-based LinkedIn Taskforce sprint, where our team secured second place through collaboration and consistent effort.",
-    note: "Good things happen together.",
-    tone: "experience-paper",
   },
   {
-    number: "05",
-    type: "HACKATHON · GENERATIVE AI",
+    type: "HACKATHON",
     title: "GUVI × HCL",
     role: "48-Hour Hackathon",
     description:
       "Collaborated on a Text-to-Image Story Generator, exploring how generative AI can transform written ideas into visual storytelling experiences.",
-    note: "48 hours of ideas and experimentation.",
-    tone: "experience-blue",
   },
   {
-    number: "06",
-    type: "LEARNING · CERTIFICATIONS",
+    type: "CLOUD LEARNING",
     title: "Google Cloud",
     role: "Cloud Labs & Skill Badges",
     description:
       "Explored Google Cloud through hands-on labs and completed learning activities that helped build familiarity with cloud technologies.",
-    note: "Always room to learn more.",
-    tone: "experience-rose",
   },
 ];
+
+function ProjectVisual({ type }: { type: string }) {
+  if (type === "sentinel") {
+    return (
+      <div className="project-visual sentinel-visual">
+        <div className="visual-window">
+          <div className="visual-window-top">
+            <span className="visual-dots"><i /><i /><i /></span>
+            <span>sentinel / overview</span>
+          </div>
+          <div className="sentinel-dashboard">
+            <div className="visual-sidebar">
+              <span className="visual-brand">S.</span>
+              <span className="sidebar-active">⌂</span>
+              <span>◫</span>
+              <span>⌁</span>
+              <span>⚙</span>
+            </div>
+            <div className="sentinel-main">
+              <div className="visual-greeting">
+                <div>
+                  <small>WORKSPACE / OVERVIEW</small>
+                  <h4>Transaction insights</h4>
+                </div>
+                <span className="visual-avatar">R</span>
+              </div>
+              <div className="sentinel-stats">
+                <div><small>Transactions</small><strong>2,480</strong><span>Analysed records</span></div>
+                <div><small>Risk signals</small><strong>18</strong><span>Flagged for review</span></div>
+              </div>
+              <div className="sentinel-chart">
+                <div className="chart-heading"><span>Activity overview</span><span>Recent activity</span></div>
+                <div className="chart-bars">
+                  {[36, 55, 43, 76, 49, 87, 61, 72, 48, 94, 65, 80].map((height, index) => (
+                    <i key={index} style={{ height: `${height}%` }} />
+                  ))}
+                </div>
+              </div>
+              <div className="sentinel-alert">
+                <span className="alert-dot" />
+                <span>Unusual activity detected</span>
+                <strong>Review</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (type === "focusflow") {
+    return (
+      <div className="project-visual focusflow-visual">
+        <div className="focus-window">
+          <div className="focus-topbar">
+            <span className="focus-logo">focusflow.</span>
+            <span className="focus-profile">R</span>
+          </div>
+          <div className="focus-content">
+            <div className="focus-welcome">
+              <small>YOUR PERSONAL WORKSPACE</small>
+              <h4>Make room for<br /><em>what matters.</em></h4>
+              <p>A calmer way to get things done.</p>
+            </div>
+            <div className="focus-task-panel">
+              <div className="focus-task-heading"><strong>Today&apos;s focus</strong><span>03 tasks</span></div>
+              <div className="focus-task"><i className="task-check checked" /><span>Plan project structure</span><small>Done</small></div>
+              <div className="focus-task"><i className="task-check" /><span>Work on the interface</span><small>In progress</small></div>
+              <div className="focus-task"><i className="task-check" /><span>Review and refine</span><small>Upcoming</small></div>
+            </div>
+          </div>
+        </div>
+        <div className="focus-sticky-note">one thing<br />at a time.</div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="project-visual story-visual">
+      <div className="story-paper">
+        <span className="story-overline">A STORY BEGINS WITH AN IDEA</span>
+        <h4>Where words<br />become <em>worlds.</em></h4>
+        <p>Imagine it. Write it. See it.</p>
+        <div className="story-artwork">
+          <div className="story-sun" />
+          <div className="story-mountain mountain-back" />
+          <div className="story-mountain mountain-front" />
+          <div className="story-ground" />
+        </div>
+        <span className="story-caption">A little imagination goes a long way.</span>
+      </div>
+      <span className="story-side-word">CREATE</span>
+    </div>
+  );
+}
 
 export default function Home() {
   return (
@@ -149,16 +223,10 @@ export default function Home() {
               Still learning, still building.
             </span>
           </div>
-
-          <div className="hero-footnote">
-            <span className="footnote-line" />
-            Computer Science · Creativity · Curiosity
-          </div>
         </div>
 
         <div className="hero-visual">
           <div className="photo-backdrop" />
-
           <div className="photo-frame">
             <Image
               src="/rajshree-portrait.jpg"
@@ -168,40 +236,19 @@ export default function Home() {
               priority
               className="portrait"
             />
-
             <div className="photo-caption">
-              <span>THE BEGINNING</span>
-              <span>01 / A STORY IN PROGRESS</span>
+              <span>RAJSHREE</span>
+              <span>Computer Science & Engineering</span>
             </div>
           </div>
-
-          <div className="photo-note">
-            <span>✳</span> Made of ideas & curiosity
-          </div>
-
-          <div className="vertical-note">
-            A creative mind at work
-          </div>
-        </div>
-
-        <div className="hero-index">
-          <span>01</span>
-          <span className="index-divider" />
-          <span>THE BEGINNING</span>
         </div>
       </section>
-
-      <div className="chapter-strip">
-        <span>LOCATION · INDIA</span>
-        <p>Somewhere between curiosity and creation.</p>
-        <span>CHAPTER 01 — 2026</span>
-      </div>
 
       <section className="about-section" id="about">
         <div className="about-heading">
           <div className="eyebrow">
             <span />
-            Chapter 02
+            A little about me
           </div>
 
           <h2>
@@ -256,9 +303,7 @@ export default function Home() {
               <p>
                 The roots of my journey and the beginning of many stories.
               </p>
-              <span className="note-sign handwritten">
-                My starting point
-              </span>
+              <span className="note-sign handwritten">My starting point</span>
             </article>
 
             <article className="journey-note college-note">
@@ -268,15 +313,8 @@ export default function Home() {
                 Computer Science and Engineering, learning and building
                 along the way.
               </p>
-              <span className="note-sign handwritten">
-                The current chapter
-              </span>
+              <span className="note-sign handwritten">The current chapter</span>
             </article>
-          </div>
-
-          <div className="about-bottom-note">
-            <span>✳</span>
-            <p>A little curiosity can take you a long way.</p>
           </div>
         </div>
       </section>
@@ -286,7 +324,7 @@ export default function Home() {
           <div>
             <div className="eyebrow">
               <span />
-              Chapter 03 · Selected work
+              A collection of things I&apos;ve built
             </div>
 
             <h2>
@@ -297,25 +335,25 @@ export default function Home() {
           </div>
 
           <p className="projects-intro-note handwritten">
-            A few things I&apos;ve been creating along the way...
+            Each project has a story of its own.
           </p>
         </div>
 
-        <div className="projects-list">
-          {projects.map((project) => (
-            <article className="project-entry" key={project.number}>
-              <div className="project-number">{project.number}</div>
+        <div className="projects-showcase">
+          {projects.map((project, index) => (
+            <article
+              className={`project-showcase project-showcase-${index + 1}`}
+              key={project.title}
+            >
+              <div className="project-showcase-visual">
+                <ProjectVisual type={project.visual} />
+              </div>
 
-              <div className="project-details">
+              <div className="project-showcase-details">
                 <span className="project-category">{project.category}</span>
-
                 <h3>{project.title}</h3>
-
-                <p className="project-subtitle">{project.subtitle}</p>
-
-                <p className="project-description">
-                  {project.description}
-                </p>
+                <h4>{project.subtitle}</h4>
+                <p>{project.description}</p>
 
                 <div className="project-technologies">
                   {project.technologies.map((technology) => (
@@ -323,19 +361,8 @@ export default function Home() {
                   ))}
                 </div>
               </div>
-
-              <div className="project-side-note">
-                <span className="project-status">{project.status}</span>
-                <p className="handwritten">{project.note}</p>
-                <span className="project-star">✳</span>
-              </div>
             </article>
           ))}
-        </div>
-
-        <div className="projects-footer-note">
-          <span>✳</span>
-          <p>Not just finished projects. Each one is a lesson in itself.</p>
         </div>
       </section>
 
@@ -343,7 +370,7 @@ export default function Home() {
         <div className="experience-heading">
           <div className="eyebrow">
             <span />
-            Chapter 04 · The journey so far
+            The journey so far
           </div>
 
           <h2>
@@ -357,47 +384,25 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="experience-timeline">
-          {experiences.map((experience) => (
-            <article
-              className={`experience-entry ${experience.tone}`}
-              key={experience.number}
-            >
-              <div className="experience-marker">
-                <span>{experience.number}</span>
-              </div>
-
-              <div className="experience-card">
-                <span className="experience-type">{experience.type}</span>
-
-                <h3>{experience.title}</h3>
-
-                <h4>{experience.role}</h4>
-
-                <p>{experience.description}</p>
-
-                <span className="experience-note handwritten">
-                  {experience.note}
-                </span>
-              </div>
+        <div className="experience-grid">
+          {experiences.map((experience, index) => (
+            <article className="experience-card" key={experience.title}>
+              <span className="experience-type">{experience.type}</span>
+              <h3>{experience.title}</h3>
+              <h4>{experience.role}</h4>
+              <p>{experience.description}</p>
+              <span className="experience-card-accent">
+                {String(index + 1).padStart(2, "0")}
+              </span>
             </article>
           ))}
-        </div>
-
-        <div className="experience-footer-note">
-          <span>✳</span>
-          <p>
-            Every opportunity has added a new perspective to my journey.
-          </p>
         </div>
       </section>
 
       <section className="next-chapter" id="contact">
-        <span className="chapter-number">05</span>
-
         <div className="eyebrow">
           <span />
-          The next chapter
+          Have something in mind?
         </div>
 
         <div className="next-chapter-content">
@@ -410,24 +415,16 @@ export default function Home() {
           <p>
             Have an idea, an opportunity or simply want to say hello?
             I&apos;d love to hear from you.
-            <br />
-            <br />
-            <a href="mailto:rajshree2107004@gmail.com">
-              rajshree2107004@gmail.com ↗
-            </a>
           </p>
+
+          <a
+            className="contact-email"
+            href="mailto:rajshree2107004@gmail.com"
+          >
+            rajshree2107004@gmail.com ↗
+          </a>
         </div>
       </section>
-
-      <footer className="footer">
-        <a href="#home" className="monogram">
-          R<span>.</span>
-        </a>
-
-        <p>Made with curiosity, creativity & a little bit of coffee.</p>
-
-        <a href="#home">BACK TO THE BEGINNING ↑</a>
-      </footer>
     </main>
   );
 }
