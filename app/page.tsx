@@ -1,5 +1,8 @@
 
+"use client";
+
 import Image from "next/image";
+import { motion, useReducedMotion } from "framer-motion";
 
 const projects = [
   {
@@ -10,7 +13,6 @@ const projects = [
       "An AI-powered credit card fraud detection system that explores anomaly detection to identify suspicious transactions and make digital payments safer.",
     technologies: ["Python", "FastAPI", "Next.js", "Supabase", "Machine Learning"],
     visual: "sentinel",
-    visualLabel: "Fraud Detection Dashboard",
   },
   {
     category: "FULL STACK DEVELOPMENT",
@@ -20,7 +22,6 @@ const projects = [
       "A productivity application designed to help users organise their work, manage tasks and build better focus habits through a clean and interactive experience.",
     technologies: ["React", "Vite", "Node.js", "Express", "Claude API"],
     visual: "focusflow",
-    visualLabel: "Productivity Workspace",
   },
   {
     category: "GENERATIVE AI",
@@ -30,7 +31,30 @@ const projects = [
       "A text-to-image story generation project developed during the GUVI × HCL hackathon, exploring the creative possibilities of generative AI.",
     technologies: ["Python", "Generative AI", "Text-to-Image"],
     visual: "story",
-    visualLabel: "Creative Storytelling",
+  },
+];
+
+
+const skillGroups = [
+  {
+    title: "Programming",
+    description: "The languages I use to think through problems.",
+    skills: ["C", "C++", "Python", "JavaScript"],
+  },
+  {
+    title: "AI & Machine Learning",
+    description: "The area I am most curious to explore and build in.",
+    skills: ["Machine Learning", "Anomaly Detection", "Generative AI", "Prompt Engineering"],
+  },
+  {
+    title: "Web Development",
+    description: "Turning ideas into useful, interactive experiences.",
+    skills: ["HTML", "CSS", "Tailwind CSS", "React", "Next.js", "Node.js", "Express", "FastAPI"],
+  },
+  {
+    title: "Tools & Platforms",
+    description: "The tools that support my everyday workflow.",
+    skills: ["Git", "GitHub", "VS Code", "Supabase", "Google Cloud"],
   },
 ];
 
@@ -79,15 +103,44 @@ const experiences = [
   },
 ];
 
+const reveal = {
+  hidden: {
+    opacity: 0,
+    y: 55,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: [0.22, 1, 0.36, 1] as const,
+    },
+  },
+};
+
+const stagger = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.14,
+    },
+  },
+};
+
 function ProjectVisual({ type }: { type: string }) {
   if (type === "sentinel") {
     return (
       <div className="project-visual sentinel-visual">
         <div className="visual-window">
           <div className="visual-window-top">
-            <span className="visual-dots"><i /><i /><i /></span>
+            <span className="visual-dots">
+              <i />
+              <i />
+              <i />
+            </span>
             <span>sentinel / overview</span>
           </div>
+
           <div className="sentinel-dashboard">
             <div className="visual-sidebar">
               <span className="visual-brand">S.</span>
@@ -96,6 +149,7 @@ function ProjectVisual({ type }: { type: string }) {
               <span>⌁</span>
               <span>⚙</span>
             </div>
+
             <div className="sentinel-main">
               <div className="visual-greeting">
                 <div>
@@ -104,23 +158,56 @@ function ProjectVisual({ type }: { type: string }) {
                 </div>
                 <span className="visual-avatar">R</span>
               </div>
+
               <div className="sentinel-stats">
-                <div><small>Transactions</small><strong>2,480</strong><span>Analysed records</span></div>
-                <div><small>Risk signals</small><strong>18</strong><span>Flagged for review</span></div>
-              </div>
-              <div className="sentinel-chart">
-                <div className="chart-heading"><span>Activity overview</span><span>Recent activity</span></div>
-                <div className="chart-bars">
-                  {[36, 55, 43, 76, 49, 87, 61, 72, 48, 94, 65, 80].map((height, index) => (
-                    <i key={index} style={{ height: `${height}%` }} />
-                  ))}
+                <div>
+                  <small>Transactions</small>
+                  <strong>2,480</strong>
+                  <span>Analysed records</span>
+                </div>
+                <div>
+                  <small>Risk signals</small>
+                  <strong>18</strong>
+                  <span>Flagged for review</span>
                 </div>
               </div>
-              <div className="sentinel-alert">
+
+              <div className="sentinel-chart">
+                <div className="chart-heading">
+                  <span>Activity overview</span>
+                  <span>Recent activity</span>
+                </div>
+
+                <div className="chart-bars">
+                  {[36, 55, 43, 76, 49, 87, 61, 72, 48, 94, 65, 80].map(
+                    (height, index) => (
+                      <motion.i
+                        key={index}
+                        initial={{ height: 0 }}
+                        whileInView={{ height: `${height}%` }}
+                        viewport={{ once: true, amount: 0.4 }}
+                        transition={{
+                          duration: 0.8,
+                          delay: index * 0.06,
+                          ease: "easeOut",
+                        }}
+                      />
+                    )
+                  )}
+                </div>
+              </div>
+
+              <motion.div
+                className="sentinel-alert"
+                initial={{ opacity: 0, x: 15 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.8, duration: 0.6 }}
+              >
                 <span className="alert-dot" />
                 <span>Unusual activity detected</span>
                 <strong>Review</strong>
-              </div>
+              </motion.div>
             </div>
           </div>
         </div>
@@ -136,21 +223,64 @@ function ProjectVisual({ type }: { type: string }) {
             <span className="focus-logo">focusflow.</span>
             <span className="focus-profile">R</span>
           </div>
+
           <div className="focus-content">
             <div className="focus-welcome">
               <small>YOUR PERSONAL WORKSPACE</small>
-              <h4>Make room for<br /><em>what matters.</em></h4>
+              <h4>
+                Make room for
+                <br />
+                <em>what matters.</em>
+              </h4>
               <p>A calmer way to get things done.</p>
             </div>
+
             <div className="focus-task-panel">
-              <div className="focus-task-heading"><strong>Today&apos;s focus</strong><span>03 tasks</span></div>
-              <div className="focus-task"><i className="task-check checked" /><span>Plan project structure</span><small>Done</small></div>
-              <div className="focus-task"><i className="task-check" /><span>Work on the interface</span><small>In progress</small></div>
-              <div className="focus-task"><i className="task-check" /><span>Review and refine</span><small>Upcoming</small></div>
+              <div className="focus-task-heading">
+                <strong>Today&apos;s focus</strong>
+                <span>03 tasks</span>
+              </div>
+
+              {[
+                ["Plan project structure", "Done"],
+                ["Work on the interface", "In progress"],
+                ["Review and refine", "Upcoming"],
+              ].map(([task, status], index) => (
+                <motion.div
+                  className="focus-task"
+                  key={task}
+                  initial={{ opacity: 0, x: 18 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    duration: 0.5,
+                    delay: 0.3 + index * 0.15,
+                  }}
+                >
+                  <i
+                    className={`task-check ${index === 0 ? "checked" : ""}`}
+                  />
+                  <span>{task}</span>
+                  <small>{status}</small>
+                </motion.div>
+              ))}
             </div>
           </div>
         </div>
-        <div className="focus-sticky-note">one thing<br />at a time.</div>
+
+        <motion.div
+          className="focus-sticky-note"
+          animate={{ rotate: [5, 3, 5], y: [0, -5, 0] }}
+          transition={{
+            duration: 6,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        >
+          one thing
+          <br />
+          at a time.
+        </motion.div>
       </div>
     );
   }
@@ -159,24 +289,62 @@ function ProjectVisual({ type }: { type: string }) {
     <div className="project-visual story-visual">
       <div className="story-paper">
         <span className="story-overline">A STORY BEGINS WITH AN IDEA</span>
-        <h4>Where words<br />become <em>worlds.</em></h4>
+
+        <h4>
+          Where words
+          <br />
+          become <em>worlds.</em>
+        </h4>
+
         <p>Imagine it. Write it. See it.</p>
+
         <div className="story-artwork">
-          <div className="story-sun" />
-          <div className="story-mountain mountain-back" />
+          <motion.div
+            className="story-sun"
+            animate={{ y: [0, -7, 0], scale: [1, 1.04, 1] }}
+            transition={{
+              duration: 5,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+
+          <motion.div
+            className="story-mountain mountain-back"
+            animate={{ y: [0, -3, 0] }}
+            transition={{ duration: 7, repeat: Infinity }}
+          />
+
           <div className="story-mountain mountain-front" />
           <div className="story-ground" />
         </div>
-        <span className="story-caption">A little imagination goes a long way.</span>
+
+        <span className="story-caption">
+          A little imagination goes a long way.
+        </span>
       </div>
+
       <span className="story-side-word">CREATE</span>
     </div>
   );
 }
 
 export default function Home() {
+  const shouldReduceMotion = useReducedMotion();
+
+  const revealProps = shouldReduceMotion
+    ? {}
+    : {
+        variants: reveal,
+        initial: "hidden" as const,
+        whileInView: "visible" as const,
+        viewport: { once: true, amount: 0.18 },
+      };
+
   return (
     <main className="portfolio">
+      {/* NAVIGATION */}
+
       <header className="navigation">
         <a href="#home" className="monogram" aria-label="Rajshree home">
           R<span>.</span>
@@ -185,6 +353,7 @@ export default function Home() {
         <nav>
           <a href="#about">About</a>
           <a href="#work">Selected Work</a>
+          <a href="#skills">Skills</a>
           <a href="#journey">Journey</a>
           <a href="#contact">Contact</a>
         </nav>
@@ -194,8 +363,15 @@ export default function Home() {
         </a>
       </header>
 
+      {/* HERO */}
+
       <section className="hero" id="home">
-        <div className="hero-copy">
+        <motion.div
+          className="hero-copy"
+          initial={shouldReduceMotion ? false : { opacity: 0, x: -45 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+        >
           <div className="eyebrow">
             <span />
             A little introduction
@@ -219,14 +395,18 @@ export default function Home() {
             <a href="#about" className="primary-link">
               Enter my world <span>↗</span>
             </a>
-            <span className="handwritten">
-              Still learning, still building.
-            </span>
+            <span className="handwritten">Still learning, still building.</span>
           </div>
-        </div>
+        </motion.div>
 
-        <div className="hero-visual">
+        <motion.div
+          className="hero-visual"
+          initial={shouldReduceMotion ? false : { opacity: 0, y: 35, rotate: 3 }}
+          animate={{ opacity: 1, y: 0, rotate: 0 }}
+          transition={{ duration: 1.1, delay: 0.2 }}
+        >
           <div className="photo-backdrop" />
+
           <div className="photo-frame">
             <Image
               src="/rajshree-portrait.jpg"
@@ -236,16 +416,19 @@ export default function Home() {
               priority
               className="portrait"
             />
+
             <div className="photo-caption">
               <span>RAJSHREE</span>
               <span>Computer Science & Engineering</span>
             </div>
           </div>
-        </div>
+        </motion.div>
       </section>
 
+      {/* ABOUT */}
+
       <section className="about-section" id="about">
-        <div className="about-heading">
+        <motion.div className="about-heading" {...revealProps}>
           <div className="eyebrow">
             <span />
             A little about me
@@ -273,40 +456,46 @@ export default function Home() {
               <p>Learning something new every day</p>
             </div>
           </div>
-        </div>
+        </motion.div>
 
-        <div className="about-content">
-          <p>
+        <motion.div
+          className="about-content"
+          variants={stagger}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.15 }}
+        >
+          <motion.p variants={reveal}>
             Hello! I&apos;m Rajshree, a Computer Science and Engineering
             student at ABES Engineering College. My journey has been
             shaped by curiosity, new experiences and a constant desire
             to learn.
-          </p>
+          </motion.p>
 
-          <p>
+          <motion.p variants={reveal}>
             I&apos;m particularly interested in Artificial Intelligence,
             Machine Learning and software development. I enjoy exploring
             new ideas, building projects and understanding how technology
             can solve real-world problems.
-          </p>
+          </motion.p>
 
-          <p>
+          <motion.p variants={reveal}>
             Beyond coding, I enjoy being part of communities,
             collaborating with people, taking up responsibilities and
             exploring the creative side of life.
-          </p>
+          </motion.p>
 
-          <div className="journey-notes">
-            <article className="journey-note patna-note">
+          <motion.div className="journey-notes" variants={stagger}>
+            <motion.article className="journey-note patna-note" variants={reveal}>
               <span className="note-label">WHERE IT BEGAN</span>
               <h3>Patna, Bihar</h3>
               <p>
                 The roots of my journey and the beginning of many stories.
               </p>
               <span className="note-sign handwritten">My starting point</span>
-            </article>
+            </motion.article>
 
-            <article className="journey-note college-note">
+            <motion.article className="journey-note college-note" variants={reveal}>
               <span className="note-label">WHERE I AM GROWING</span>
               <h3>ABESEC</h3>
               <p>
@@ -314,13 +503,15 @@ export default function Home() {
                 along the way.
               </p>
               <span className="note-sign handwritten">The current chapter</span>
-            </article>
-          </div>
-        </div>
+            </motion.article>
+          </motion.div>
+        </motion.div>
       </section>
 
+      {/* PROJECT SHOWCASE */}
+
       <section className="projects-section" id="work">
-        <div className="projects-intro">
+        <motion.div className="projects-intro" {...revealProps}>
           <div>
             <div className="eyebrow">
               <span />
@@ -337,37 +528,156 @@ export default function Home() {
           <p className="projects-intro-note handwritten">
             Each project has a story of its own.
           </p>
-        </div>
+        </motion.div>
 
         <div className="projects-showcase">
           {projects.map((project, index) => (
-            <article
+            <motion.article
               className={`project-showcase project-showcase-${index + 1}`}
               key={project.title}
+              initial={
+                shouldReduceMotion
+                  ? false
+                  : {
+                      opacity: 0,
+                      y: 90,
+                      rotateX: 5,
+                    }
+              }
+              whileInView={{
+                opacity: 1,
+                y: 0,
+                rotateX: 0,
+              }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{
+                duration: 0.9,
+                delay: 0.08,
+                ease: [0.22, 1, 0.36, 1],
+              }}
             >
-              <div className="project-showcase-visual">
-                <ProjectVisual type={project.visual} />
-              </div>
+              <motion.div
+                className="project-showcase-visual"
+                initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true, amount: 0.25 }}
+                transition={{
+                  duration: 1,
+                  delay: 0.15,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+              >
+                <motion.div
+                  style={{ width: "100%" }}
+                  whileHover={
+                    shouldReduceMotion
+                      ? {}
+                      : {
+                          scale: 1.035,
+                          rotate: index % 2 === 0 ? -1 : 1,
+                        }
+                  }
+                  transition={{ duration: 0.6, ease: "easeOut" }}
+                >
+                  <ProjectVisual type={project.visual} />
+                </motion.div>
+              </motion.div>
 
-              <div className="project-showcase-details">
-                <span className="project-category">{project.category}</span>
-                <h3>{project.title}</h3>
-                <h4>{project.subtitle}</h4>
-                <p>{project.description}</p>
+              <motion.div
+                className="project-showcase-details"
+                variants={stagger}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.2 }}
+              >
+                <motion.span className="project-category" variants={reveal}>
+                  {project.category}
+                </motion.span>
 
-                <div className="project-technologies">
+                <motion.h3 variants={reveal}>{project.title}</motion.h3>
+
+                <motion.h4 variants={reveal}>{project.subtitle}</motion.h4>
+
+                <motion.p variants={reveal}>{project.description}</motion.p>
+
+                <motion.div
+                  className="project-technologies"
+                  variants={stagger}
+                >
                   {project.technologies.map((technology) => (
-                    <span key={technology}>{technology}</span>
+                    <motion.span
+                      key={technology}
+                      variants={reveal}
+                      whileHover={
+                        shouldReduceMotion ? {} : { y: -4, scale: 1.04 }
+                      }
+                    >
+                      {technology}
+                    </motion.span>
                   ))}
-                </div>
-              </div>
-            </article>
+                </motion.div>
+              </motion.div>
+            </motion.article>
           ))}
         </div>
       </section>
 
+
+      {/* SKILLS */}
+
+      <section className="skills-section" id="skills">
+        <motion.div className="skills-intro" {...revealProps}>
+          <div>
+            <div className="eyebrow">
+              <span />
+              The tools behind the ideas
+            </div>
+            <h2>
+              Things I work
+              <br />
+              <em>with.</em>
+            </h2>
+          </div>
+          <p>
+            A growing toolkit shaped by curiosity, practice and the projects
+            I build. I enjoy learning by experimenting and putting ideas to work.
+          </p>
+        </motion.div>
+
+        <motion.div
+          className="skills-list"
+          variants={stagger}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.12 }}
+        >
+          {skillGroups.map((group) => (
+            <motion.article className="skill-row" key={group.title} variants={reveal}>
+              <div className="skill-row-heading">
+                <span className="skill-category">{group.title}</span>
+                <span className="skill-description">{group.description}</span>
+              </div>
+              <div className="skill-items">
+                {group.skills.map((skill, index) => (
+                  <motion.span
+                    className="skill-item"
+                    key={skill}
+                    whileHover={shouldReduceMotion ? {} : { y: -5, rotate: index % 2 === 0 ? -1.5 : 1.5 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 18 }}
+                  >
+                    {skill}
+                  </motion.span>
+                ))}
+              </div>
+            </motion.article>
+          ))}
+        </motion.div>
+      </section>
+
+      {/* EXPERIENCE */}
+
       <section className="experience-section" id="journey">
-        <div className="experience-heading">
+        <motion.div className="experience-heading" {...revealProps}>
           <div className="eyebrow">
             <span />
             The journey so far
@@ -382,11 +692,30 @@ export default function Home() {
           <p className="experience-intro handwritten">
             Little steps, big lessons, and people along the way.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="experience-grid">
+        <motion.div
+          className="experience-grid"
+          variants={stagger}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.12 }}
+        >
           {experiences.map((experience, index) => (
-            <article className="experience-card" key={experience.title}>
+            <motion.article
+              className="experience-card"
+              key={experience.title}
+              variants={reveal}
+              whileHover={
+                shouldReduceMotion
+                  ? {}
+                  : {
+                      y: -8,
+                      rotate: index % 2 === 0 ? -0.5 : 0.5,
+                    }
+              }
+              transition={{ duration: 0.35 }}
+            >
               <span className="experience-type">{experience.type}</span>
               <h3>{experience.title}</h3>
               <h4>{experience.role}</h4>
@@ -394,37 +723,53 @@ export default function Home() {
               <span className="experience-card-accent">
                 {String(index + 1).padStart(2, "0")}
               </span>
-            </article>
+            </motion.article>
           ))}
-        </div>
+        </motion.div>
       </section>
 
-      <section className="next-chapter" id="contact">
-        <div className="eyebrow">
-          <span />
-          Have something in mind?
-        </div>
+      {/* CONTACT */}
 
+      <motion.section
+        className="next-chapter"
+        id="contact"
+        initial={shouldReduceMotion ? false : { opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, amount: 0.25 }}
+        transition={{ duration: 1 }}
+      >
         <div className="next-chapter-content">
-          <h2>
-            Let&apos;s create
-            <br />
-            <em>something meaningful.</em>
-          </h2>
+          <div className="eyebrow">
+            <span />
+            Have something in mind?
+          </div>
 
-          <p>
-            Have an idea, an opportunity or simply want to say hello?
-            I&apos;d love to hear from you.
-          </p>
-
-          <a
-            className="contact-email"
-            href="mailto:rajshree2107004@gmail.com"
+          <motion.div
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 35 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
           >
-            rajshree2107004@gmail.com ↗
-          </a>
+            <h2>
+              Let&apos;s create
+              <br />
+              <em>something meaningful.</em>
+            </h2>
+
+            <p>
+              Have an idea, an opportunity or simply want to say hello?
+              I&apos;d love to hear from you.
+            </p>
+
+            <a
+              className="contact-email"
+              href="mailto:rajshree2107004@gmail.com"
+            >
+              rajshree2107004@gmail.com ↗
+            </a>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
     </main>
   );
 }
