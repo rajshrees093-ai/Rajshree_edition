@@ -355,6 +355,7 @@ export default function Home() {
           <a href="#work">Selected Work</a>
           <a href="#skills">Skills</a>
           <a href="#journey">Journey</a>
+          <a href="#certificates">Certificates</a>
           <a href="#contact">Contact</a>
         </nav>
 
@@ -721,6 +722,92 @@ export default function Home() {
                 </div>
                 <h4>{experience.role}</h4>
                 <p>{experience.description}</p>
+              </div>
+            </motion.article>
+          ))}
+        </motion.div>
+      </section>
+
+      {/* CERTIFICATES */}
+
+      <section className="certificates-section" id="certificates">
+        <motion.div className="certificates-intro" {...revealProps}>
+          <div>
+            <div className="eyebrow">
+              <span />
+              Learning, recognised
+            </div>
+            <h2>
+              Little proofs
+              <br />
+              <em>of progress.</em>
+            </h2>
+          </div>
+          <p>
+            A collection of learning milestones, challenges and experiences
+            that have been part of my journey so far.
+          </p>
+        </motion.div>
+
+        <motion.div
+          className="certificates-grid"
+          variants={stagger}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.12 }}
+        >
+          {[
+            {
+              type: "CLOUD LEARNING",
+              title: "Google Cloud",
+              detail: "Hands-on labs & skill badges",
+              mark: "G",
+              tone: "cloud",
+            },
+            {
+              type: "HACKATHON",
+              title: "GUVI × HCL",
+              detail: "48-hour hackathon · Text-to-Image Story Generator",
+              mark: "GH",
+              tone: "hackathon",
+            },
+            {
+              type: "INTERNSHIP",
+              title: "CodeAlpha",
+              detail: "Python development internship",
+              mark: "CA",
+              tone: "internship",
+            },
+            {
+              type: "AI CHALLENGE",
+              title: "ABTalks Claude Challenge",
+              detail: "Challenge completion · 60/60",
+              mark: "AI",
+              tone: "challenge",
+            },
+          ].map((item) => (
+            <motion.article
+              className={`certificate-card certificate-${item.tone}`}
+              key={item.title}
+              variants={reveal}
+              whileHover={shouldReduceMotion ? {} : { y: -8, rotate: -0.6 }}
+              transition={{ duration: 0.35, ease: "easeOut" }}
+            >
+              <div className="certificate-paper">
+                <div className="certificate-topline">
+                  <span>{item.type}</span>
+                  <span className="certificate-seal">✳</span>
+                </div>
+                <div className="certificate-mark">{item.mark}</div>
+                <div className="certificate-copy">
+                  <span className="certificate-kicker">A LEARNING MILESTONE</span>
+                  <h3>{item.title}</h3>
+                  <p>{item.detail}</p>
+                </div>
+                <div className="certificate-bottomline">
+                  <span>RAJSHREE</span>
+                  <span className="certificate-flourish">〰</span>
+                </div>
               </div>
             </motion.article>
           ))}
