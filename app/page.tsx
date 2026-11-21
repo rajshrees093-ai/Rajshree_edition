@@ -680,49 +680,48 @@ export default function Home() {
         <motion.div className="experience-heading" {...revealProps}>
           <div className="eyebrow">
             <span />
-            The journey so far
+            Beyond the projects
           </div>
 
           <h2>
-            Growing through
+            Where I have
             <br />
-            <em>every experience.</em>
+            <em>grown along the way.</em>
           </h2>
 
           <p className="experience-intro handwritten">
-            Little steps, big lessons, and people along the way.
+            The people, teams and opportunities that have shaped my learning.
           </p>
         </motion.div>
 
         <motion.div
-          className="experience-grid"
+          className="experience-list"
           variants={stagger}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.12 }}
+          viewport={{ once: true, amount: 0.1 }}
         >
           {experiences.map((experience, index) => (
             <motion.article
-              className="experience-card"
+              className="experience-entry"
               key={experience.title}
               variants={reveal}
-              whileHover={
-                shouldReduceMotion
-                  ? {}
-                  : {
-                      y: -8,
-                      rotate: index % 2 === 0 ? -0.5 : 0.5,
-                    }
-              }
-              transition={{ duration: 0.35 }}
+              whileHover={shouldReduceMotion ? {} : { x: 8 }}
+              transition={{ duration: 0.35, ease: "easeOut" }}
             >
-              <span className="experience-type">{experience.type}</span>
-              <h3>{experience.title}</h3>
-              <h4>{experience.role}</h4>
-              <p>{experience.description}</p>
-              <span className="experience-card-accent">
-                {String(index + 1).padStart(2, "0")}
-              </span>
+              <div className="experience-entry-kind">
+                <span className="experience-entry-mark" />
+                <span>{experience.type}</span>
+              </div>
+
+              <div className="experience-entry-content">
+                <div className="experience-entry-title-row">
+                  <h3>{experience.title}</h3>
+                  <span className="experience-entry-arrow">↗</span>
+                </div>
+                <h4>{experience.role}</h4>
+                <p>{experience.description}</p>
+              </div>
             </motion.article>
           ))}
         </motion.div>
