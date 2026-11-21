@@ -3096,3 +3096,155 @@ a {
   .skill-items { gap: 8px; }
   .skill-item { min-height: 39px; padding: 0 13px; font-size: 10px; }
 }
+
+
+/* =========================================
+   EXPERIENCE — EDITORIAL JOURNEY
+========================================= */
+
+.experience-section {
+  position: relative;
+  padding: 140px 9% 150px;
+  background: #f2ecdf;
+  overflow: hidden;
+}
+
+.experience-heading {
+  max-width: 1250px;
+  margin: 0 auto 85px;
+}
+
+.experience-heading .eyebrow {
+  margin-bottom: 30px;
+}
+
+.experience-heading h2 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(58px, 7.5vw, 100px);
+  line-height: 0.96;
+  font-weight: 400;
+  letter-spacing: -5px;
+}
+
+.experience-heading h2 em {
+  color: var(--rose);
+  font-weight: 400;
+}
+
+.experience-intro {
+  margin-top: 25px;
+  font-size: 16px;
+}
+
+.experience-list {
+  max-width: 1250px;
+  margin: 0 auto;
+  border-top: 1px solid #d8cdbb;
+}
+
+.experience-entry {
+  display: grid;
+  grid-template-columns: minmax(170px, 0.38fr) minmax(0, 1fr);
+  gap: 55px;
+  padding: 39px 25px 42px 8px;
+  border-bottom: 1px solid #d8cdbb;
+  position: relative;
+  transition: background 0.4s ease, padding 0.4s ease;
+}
+
+.experience-entry:hover {
+  background: rgba(255, 252, 244, 0.55);
+  padding-left: 20px;
+}
+
+.experience-entry-kind {
+  display: flex;
+  align-items: center;
+  align-self: start;
+  gap: 12px;
+  padding-top: 9px;
+  color: #987d70;
+  font-size: 9px;
+  letter-spacing: 1.8px;
+  line-height: 1.7;
+}
+
+.experience-entry-mark {
+  width: 7px;
+  height: 7px;
+  flex: 0 0 7px;
+  border-radius: 50%;
+  background: var(--rose);
+  box-shadow: 0 0 0 4px rgba(164, 119, 121, 0.11);
+}
+
+.experience-entry-content {
+  max-width: 760px;
+}
+
+.experience-entry-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.experience-entry-title-row h3 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(30px, 3.5vw, 47px);
+  line-height: 1.08;
+  font-weight: 400;
+  letter-spacing: -1.5px;
+}
+
+.experience-entry-arrow {
+  color: #a58d76;
+  font-size: 21px;
+  opacity: 0.55;
+  transform: translate(-5px, 5px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.experience-entry:hover .experience-entry-arrow {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+.experience-entry-content h4 {
+  margin-top: 9px;
+  color: #927d69;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 17px;
+  font-style: italic;
+  font-weight: 400;
+}
+
+.experience-entry-content p {
+  max-width: 690px;
+  margin-top: 16px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.95;
+}
+
+@media (max-width: 800px) {
+  .experience-section { padding: 105px 7% 115px; }
+  .experience-heading { margin-bottom: 60px; }
+  .experience-entry { grid-template-columns: 1fr; gap: 16px; padding: 29px 12px 32px 5px; }
+  .experience-entry:hover { padding-left: 12px; }
+  .experience-entry-kind { padding-top: 0; }
+}
+
+@media (max-width: 600px) {
+  .experience-section { padding: 85px 7% 95px; }
+  .experience-heading h2 { font-size: clamp(49px, 11vw, 66px); letter-spacing: -3px; }
+  .experience-entry-title-row h3 { font-size: 34px; }
+  .experience-entry-content h4 { font-size: 16px; }
+  .experience-entry-content p { font-size: 11px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .experience-entry,
+  .experience-entry-arrow { transition: none; }
+  .experience-entry:hover { padding-left: 8px; }
+}
